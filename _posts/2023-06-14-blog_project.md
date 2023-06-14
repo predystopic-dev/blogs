@@ -1,0 +1,54 @@
+---
+title: Why I made this blog page? Also setting it up using Jekyll
+author: Dev
+date: 2023-06-14 22:10:00 +0530
+categories: [Project, Blog]
+tags: [about_me, blog, project, jekyll]
+render_with_liquid: false
+---
+
+## Why Blogging?
+Welll, no reason. I just wanted to document the stuff I make, learn, do, read, or feel, so that I can easily look back again if needed. Although I doubt my ability to go back to learn from the mistakes I made, I'll just make them again and get angry on closed stackoverflow threads that abuse OP and link them to a completely different answer. 
+Well, It could be nice for others though eh? 
+I've also been meaning to journal my days, mostly to keep myself sane, but I could never stick to physically writing in an actual journal for longer than 4 days, 6 if I start on Friday evening, and doing so on mobile is quite boring (like anything else with mobiles). I also tried to journal my days in form of poetry, but, it takes too much effort to think of words - after spending 10 or so hours in college, hence rose inconsistency. I am hoping it'll be easy to make blogs instead, but well time will tell.
+
+## How to set up blog using Jekyll
+Now that the rant is over, let me lay down the steps for creating your blog page using jekyll. Honestly, the jekyll website is great page to start, so is the github guide, there are also tons of third party guides made by users smarter than me all over on internet. Soo it's unlikely my guide will bring anything new to you. But I had to start blogging somehow huh? It's not for you, It's for me
+
+#### Why Jekyll? 
+That's an easy one, static sites are cool! And Jekyll is [Open Source!](https://github.com/jekyll/jekyll), plus there're tons of pre-made themes [available](https://github.com/topics/jekyll-theme) on internet that you don't have to bang your head on a wall if you're not a designer or if colors and design and creativity doesn't come as easy to you, as others. Also Jekyll's [creator](https://en.wikipedia.org/wiki/Tom_Preston-Werner#) is one of the co-founders of github! although he resigned from github, there's still native support for jekyll on github-pages, that is you don't have to write any github actions, nor have to worry about setting up pages to read your site. It works out of the box, and it automatically updates your site as push commits to your project. You can just focus on writing, on your content, and not worry about the nitty gritty of hosting web sites or formatting their html. 
+
+#### How do you start?
+First of all you need [Ruby](https://www.ruby-lang.org/en/), because jekyll is written in ruby, so you need Ruby to use jekyll (we're going in circles now). You don't have to learn Ruby though, there're only few commands you need to know and you're good to go. However, if you wish to write plugins for Jekyll, you need to know Ruby.
+- ##### Linux
+    - Most linux systems come preinstalled with Ruby but if yours doesn't - Go [here](https://www.ruby-lang.org/en/documentation/installation/#package-management-systems) to find the packages you need to install
+    - Upon installing edit your ``~/.bashrc`` file and add these lines to add ruby to your path and be able to use it's [Gems](https://guides.rubygems.org/what-is-a-gem/). 
+    ``` bash
+    export GEM_HOME=$HOME/gems
+    export PATH=$HOME/gems/bin:$PATH
+    export PATH=$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH
+    ```
+    - After all this run the command ``gem install jekyll bundler`` to install jekyll gem and bundler.
+- ##### Windows
+    - Best way to download Ruby is using [Ruby Installer](https://rubyinstaller.org/downloads), specifically the DevKit version - usually named so "Ruby+Devkit x.x.x.x (x64 or x86)" where x.x.x.x is version. This downloads the Development Kit of Ruby for windows, with some required Gems, installing this will save you some hassle.
+    - Upon downloading and installing RubyInstaller without changing any installation options unless you know what you're doing, open a cmd window and run the ``ridk install`` command.
+    - Select ``MSYS2 and MINGW development tool chain`` option.
+    - Close the cmd window and press windows key, type "Environment Properties"->Press Enter
+    - Click on Environment Variables button
+    - Select the Path Variable from list and click on edit
+    - After the semicolon add ``;YOUR_RUBY_INSTALLATION_PATH\bin;`` Your_Ruby_Installation will by default be ``C:\Program Files\ruby<version>\bin`` check version yourself.
+    - After that click OK few times.
+    - Open a new CMD window and run these commands - ``gem install jekyll bundler``
+
+    Now Jekyll should be installed
+    To create a jekyll site go to desired directory and run
+    ``jekyll new SITE_NAME``
+    this will create necessary files and directories for a jekyll website
+
+    To add desired themes you can go to any theme's github page and copy their ``_layouts`` directory into your site directory. Or you can edit your ``GemFile`` and add ``gem "theme_name"`` like ``gem "minimal-mistakes-jekyll"`` if you want to install [minimal-mistakes theme](https://mmistakes.github.io/minimal-mistakes/). Also add 
+    ``gem "github-pages", group: :jekyll_plugins`` to your GemFile for using github pages. Then run ``bundle`` command. And in the end edit your ``_config.yml`` file to add this line ``theme: THEME_NAME``
+
+    Now to host this site on github pages, head to your github: 
+        - Create a new Public Repository with any name you want (or if you want an organizaation or user site name it as ``<user>.github.io or <organization>.github.io``) 
+        - Upload the site you created locally, or create a new one with the same steps but use ``git init .`` command in start for setting up git vcs
+        - Now once your site is in your github repo, go to ``Settings -> Code & Automation -> Pages`` on github repo page. There will come an option to set up Github actions for jekyll, click on that, and after a bunch of mindless clicks on OK, you will have set up a Github Action to Build and Deploy your Jekyll site, after a minute or so it will go live on your github.io page, find it's link by going to``Settings -> Code & Automation -> Pages`` 
